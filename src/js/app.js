@@ -1,15 +1,11 @@
+import fetchData from './http';
 
+export default function getLevel(userId) {
+  const response = fetchData(`https://server/user/${userId}`);
 
-const characters = [
-  { name: 'мечник', health: 10 },
-  { name: 'маг', health: 100 },
-  { name: 'лучник', health: 80 },
-];
+  if (response.status === 'ok') {
+    return `Ваш текущий уровень: ${response.level}`;
+  }
 
-const sorting = (a, b) => b.health - a.health;
-
-export default function sortArray() {
-  return characters.sort(sorting);
+  return 'Информация об уровне временно недоступна';
 }
-
-console.log(sortArray(characters));
